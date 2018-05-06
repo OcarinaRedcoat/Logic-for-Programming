@@ -8,3 +8,8 @@ Métodos para resolver este problema:
   4- Cagar no tecnico e dedicar-me ao plano B - assassino por contrato <- (bem melhor)
 
 Nota nos 2 primeiros casos usar os pdfs do Bruninho para ajudar
+
+
+
+uma vez que acedes à lista de terms...
+repara que o teu prefix, vai-te dando sempre mais 1 elemento da lista (que vai para o fim desta) em cada iteração, tu só tens que comparar esse elem que é sempre adicionado no fim com a tua Pos, dada com input
