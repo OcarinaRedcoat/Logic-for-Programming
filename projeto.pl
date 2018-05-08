@@ -1,32 +1,19 @@
-%-----------------------------------------------
-%| Ricardo Caetano - 87699
-%-----------------------------------------------
-include(exemplos_puzzles).
+/*-----------------------------------------------*\
+| Ricardo Caetano - 87699                         |
+\*-----------------------------------------------*/
+:- include('exemplos_puzzles.pl').
 
-propaga(Puz, Pos, Posicoes) :-
+
+
+propaga([H|_], Pos, Posicoes) :-
+  member(Term, H),
+  append(Pref, [Pos|_], Term),
+  sort([Pos|Pref], Posicoes).
+
+
+nao_altera_linhas_anteriores(Posicoes, L, Ja_Preenchidas) :-
   
 
-
-
-% propaga([[[H2|T2]|T1]|T], Pos, Posicoes) :-
-%   member(H2, Pos),
-%   propaga([T2|T1]|T], Pos, Posicoes),
-%   last(Pos, H2),
-%
-%
-%
-%
-%
-%
-%
-%
-%
-%   sort(Posicoes, PosicoesOrd).
-
-
-
-
-nao_altera_linhas_anteriores().
-verifica_parcial().
-possibilidades_linha().
-resolve().
+% verifica_parcial().
+% possibilidades_linha().
+% resolve().
