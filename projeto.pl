@@ -6,7 +6,7 @@
 %TODO: nos comentarios fiquei no nao_altera_linhas_anteriores
 
 /*-----------------------------------------------*\
-| Predicados Auxiliares                       |
+| Predicados Auxiliares                           |
 \*-----------------------------------------------*/
 
 /*----------------------------------------------------------------------------*\
@@ -46,7 +46,6 @@ nao_altera_linhas_anteriores([(X,_)|T], L, Ja_Preenchidas) :-
 |
 \*----------------------------------------------------------------------------*/
 how_many_in_collums([], _, 0).
-
 how_many_in_collums([(_,Y)|T], Collum, Result) :-
   how_many_in_collums(T, Collum, Aux),
   (Y == Collum, Accomulator = 1; Accomulator = 0),
@@ -60,11 +59,13 @@ how_many_in_collums([(_,Y)|T], Collum, Result) :-
 | Devolve: Uma lista de posicoes ate a pos que temos de preencher ordenadamente
 |
 \*----------------------------------------------------------------------------*/
-verifica_parcial_auxiliar(Collum, [(_|Y)|T], Count, Dim) :-
-  how_many_in_collums([(_,Y)|T], Count, Total),
-  Y >= Total,
-  Count_Aux is Count +1,
-  verifica_parcial_auxiliar(Collum, T, Count_Aux, Dim).
+verifica_parcial_auxiliar([],_,_,_).
+verifica_parcial_auxiliar(_,_,Count, Dim) :- Count > Dim, !.
+verifica_parcial_auxiliar([H|T], Lst, Count, Dim) :-
+  how_many_in_collums(Lst, Count, Total),
+  H >= Total,
+  Count_Aux is Count + 1,
+  verifica_parcial_auxiliar(T, Lst, Count_Aux, Dim).
 
 /*----------------------------------------------------------------------------*\
 | verifica_parcial:
@@ -75,5 +76,11 @@ verifica_parcial_auxiliar(Collum, [(_|Y)|T], Count, Dim) :-
 \*----------------------------------------------------------------------------*/
 verifica_parcial(Puz, Ja_Preenchidas, Dim, Poss) :-
   union(Ja_Preenchidas, Poss, LstVerifica),
-  Puz = [_, _, Collums],
+  Puz = [_, _,Collums],
   verifica_parcial_auxiliar(Collums, LstVerifica, 1, Dim).
+
+
+/*-----------------------------------------------*\
+| Predicados do Projeto                           |
+possibilidades_linha(Puz, Posicoes_linha, Total, Ja_Preenchidas, Possibilidades).
+\*-----------------------------------------------*/

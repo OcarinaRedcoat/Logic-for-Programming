@@ -12,4 +12,13 @@ Nota nos 2 primeiros casos usar os pdfs do Bruninho para ajudar
 
 
 uma vez que acedes à lista de terms...
-repara que o teu prefix, vai-te dando sempre mais 1 elemento da lista (que vai para o fim desta) em cada iteração, tu só tens que comparar esse elem que é sempre adicionado no fim com a tua Pos, dada com input
+repara que o teu prefix, vai-te dando sempre mais 1 elemento da lista (que vai para o fim desta) em cada iteração, tu só tens que comparar esse elem que é sempre adicionado no fim com a tua Pos, dada com input - DONE
+
+possibilidades linha:
+  1 - fazer as combinacoes para gerar as possiveis resolucoes
+  2 - testar as propostas dadas pelas combinacoes:
+  3 - fazer verificacoes
+  4 - propaga
+  5 - verifica parcial
+  6 - unificar listas (?)
+  7 - verificar se o total de solucoes possiveis e igual ao total
