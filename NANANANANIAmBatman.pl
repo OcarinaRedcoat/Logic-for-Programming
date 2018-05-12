@@ -98,14 +98,6 @@ verifica_parcial(Puz, Ja_Preenchidas, Dim, Poss) :-
   verifica_parcial_auxiliar(Collums, LstVerifica, 1, Dim).
 
 /*----------------------------------------------------------------------------*\
-|                                                                              |
-|                                                                              |
-|                         Predicados do Projeto                                |
-|                                                                              |
-|                                                                              |
-\*----------------------------------------------------------------------------*/
-
-/*----------------------------------------------------------------------------*\
 | combine_positions_list:
 | Recebe: - Lista
 |         - HowManyCombine que diz o numero das combinaces, e.g combinacoes
@@ -137,6 +129,13 @@ propaga_possibilidades_aux(Puz, [H|T], Res1) :-
   propaga_possibilidades_aux(Puz, T, R),
   union(R, Res, Res1).
 
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                                                                              |
+|                         Predicados do Projeto                                |
+|                                                                              |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------*\
 | how_many_in_lines:
@@ -200,16 +199,24 @@ possibilidade_uma(Puz, Posicoes_linha, Total, Ja_Preenchidas, Possibilidade) :-
 |         - Dimensao do puzzle
 | Devolve: Solucao
 \*----------------------------------------------------------------------------*/
-resolve_auxiliar(_, [], _,Solucao, _, Solucao).
-resolve_auxiliar(Puz, [H|T], Count, Ja_Preenchidas, Dim, Solucao) :-
+resolve_auxiliar(_, [], _, [], _).
+resolve_auxiliar(_,_, Count, _, Dim,_) :- Dim < Count, !.
+resolve_auxiliar(Puz, [H|T], Count, Ja_Preenchidas, Dim,Solucao) :-
   Puz = [_,Linhas,_],
   length(Linhas, Dim),
   findall(P, (P = (Count, C), between(1, Dim, C)), Linha),
+  
   possibilidades_linha(Puz, Linha, H, Ja_Preenchidas, Possibilidades),
-  member(X, Possibilidades),
-  union(X, Ja_Preenchidas, Novas_Preenchidas),
+  
+  %member(X, Possibilidades),
+  union(Possibilidades, Ja_Preenchidas, Novas_Preenchidas),
   CountNext is Count + 1,
-  resolve_auxiliar(Puz, T, CountNext, Novas_Preenchidas, Dim, Solucao).
+  
+  resolve_auxiliar(Puz, T, CountNext, Novas_Preenchidas, Dim, Solucao),
+  sort(Novas_Preenchidas, Solucao).
+
+
+
 
 
 /*----------------------------------------------------------------------------*\
